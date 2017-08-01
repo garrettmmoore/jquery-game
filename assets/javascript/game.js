@@ -50,14 +50,14 @@ $(document).ready(function()
 		}
 		console.log(totalScore);
 		console.log(winningNumber);
-		else (totalScore > winningNumber)
-		{
-			losses++;
-			$(".win-loss-box").html("You lose..");
-			reset();
-		}
-		$("#win-row").html(wins);
-		$("#loss-row").html(losses);
+		// else (totalScore > winningNumber)
+		// {
+		// 	losses++;
+		// 	$(".win-loss-box").html("You lose..");
+		// 	reset();
+		// }
+		// $("#win-row").html(wins);
+		// $("#loss-row").html(losses);
 	}
 
 
