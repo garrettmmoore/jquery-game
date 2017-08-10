@@ -1,9 +1,23 @@
 $(document).ready(function() 
 {	
-	// Declare initial variables
-	// $("gem-value-box")===totalScore;
+
+
+// Declare Variables ------------------------------------------------------------>
+
 
 	var winningNumber = 0;
+	var totalScore = 0;
+	var wins = 0;
+	var losses = 0;
+	var rubyRandom = 0;
+	var sapphireRandom = 0;
+	var topazRandom = 0;
+	var emeraldRandom = 0;
+
+
+// Randomizer functions ------------------------------------------------------------>
+
+
 	// Generate random Winning number 
 	function newWinningNumber(){
 		winningNumber = Math.floor(Math.random() * 119) + 1;
@@ -16,122 +30,129 @@ $(document).ready(function()
 	}
 	
 
-	var totalScore = 0;
-	var wins = 0;
-	var losses = 0;
-
 	// Generate random values for each Gem
-	var rubyRandom = Math.floor(Math.random() * 11) + 1;
-	console.log("Current ruby Value: " + rubyRandom);
-	var sapphireRandom = Math.floor(Math.random() * 11) + 1;
-	console.log("Current sapphire Value: " + sapphireRandom);
-	var topazRandom = Math.floor(Math.random() * 11) + 1;
-	console.log("Current topaz Value: " + topazRandom);
-	var emeraldRandom = Math.floor(Math.random() * 11) + 1;
-	console.log("Current emerald Value: " + emeraldRandom);
-	
-
-	
-
 	// Assign the gems to their appropriate random value
+	function newRubyRandom(){
+	rubyRandom = Math.floor(Math.random() * 11) + 1;
+	console.log("Current ruby Value: " + rubyRandom);
 	$("#ruby").val(rubyRandom);
+	$("#ruby").val();
+	}
+
+	function newSapphireRandom(){
+	sapphireRandom = Math.floor(Math.random() * 11) + 1;
+	console.log("Current sapphire Value: " + sapphireRandom);
 	$("#sapphire").val(sapphireRandom);
+	}
+
+	function newTopazRandom(){
+	topazRandom = Math.floor(Math.random() * 11) + 1;
+	console.log("Current topaz Value: " + topazRandom);
 	$("#topaz").val(topazRandom);
+	}
+
+	function newEmeraldRandom(){
+	emeraldRandom = Math.floor(Math.random() * 11) + 1;
+	console.log("Current emerald Value: " + emeraldRandom);
 	$("#emerald").val(emeraldRandom);
-	
-	// How the game works..
-	function gamePlay(x,y)
+	}
+
+
+// Click Functions --------------------------------------------------------------->
+
+
+	newWinningNumber();
+	newRubyRandom();
+	newSapphireRandom();
+	newTopazRandom();
+	newEmeraldRandom();
+
+
+// Game Play Function ------------------------------------------------------------>
+
+
+	function gamePlay()
 	{	
 		if(totalScore == winningNumber)
 		{
 			wins++;
-			$(".win-loss-box").html("You win!!");
+			$(".result").html("You win!!");
 			reset();
 		}
 		console.log(totalScore);
 		console.log(winningNumber);
-		// else (totalScore > winningNumber)
-		// {
-		// 	losses++;
-		// 	$(".win-loss-box").html("You lose..");
-		// 	reset();
-		// }
-		// $("#win-row").html(wins);
-		// $("#loss-row").html(losses);
+		if (totalScore > winningNumber)
+		{
+			losses++;
+			$(".result").html("You lose..");
+			reset();
+		}
+
 	}
 
 
+// Click Functions ------------------------------------------------------------>
+
+function clickHelper(gem){
+		$(".result").html("");
+		console.log(rubyRandom);
+		$(".gem-value-box").append(totalScore = totalScore + gem);
+		$(".gem-value-box").append(" | ");
+		console.log(totalScore);
+		gamePlay();
+}
 	// When Ruby is clicked, add value to totalScore on each click
-	$("#ruby").on("click", function ruby(){
-		
-		// $(".gem-value-box").html(rubyRandom);
-		console.log(rubyRandom);
-		$(".gem-value-box").append(totalScore = totalScore + rubyRandom);
-		$(".gem-value-box").append(" | ");
-		console.log(rubyRandom);
-		console.log(totalScore);
-		gamePlay(totalScore);
-
-
+	$(".gem").on("click", function ruby(){
+		var num = $(this).val();
+		num = parseInt(num);
+		clickHelper(rubyRandom);
+	});
 	// When Sapphire is clicked, add value to totalScore on each click
-	});
-	$("#sapphire").on("click", function sapphire(x){
-		// $(".gem-value-box").html(sapphireRandom);
-		$(".gem-value-box").append(totalScore = totalScore + sapphireRandom );
-		$(".gem-value-box").append(" | ");
-		console.log(totalScore);
-		gamePlay();
-
-		
+	
+	$("#sapphire").on("click", function sapphire(){
+		clickHelper(sapphireRandom);
+	});	
 	// When Topaz is clicked, add value to totalScore on each click
+	$("#topaz").on("click", function topaz(){
+		clickHelper(topazRandom);
 	});
-
-	$("#topaz").on("click", function topaz(x){
-		// $(".gem-value-box").html(topazRandom);
-		$(".gem-value-box").append(totalScore = totalScore + topazRandom);
-		$(".gem-value-box").append(" | ");
-		console.log(totalScore);
-		gamePlay();
-
-	});
-
 	// When Emerald is clicked, add value to totalScore on each click
-	$("#emerald").on("click", function emerald(x){
-		// $(".gem-value-box").html(emeraldRandom);
-		$(".gem-value-box").append(totalScore = totalScore + emeraldRandom);
-		$(".gem-value-box").append(" | ");
-		console.log(totalScore);
-		gamePlay();
-
+	$("#emerald").on("click", function emerald(){
+		clickHelper(emeraldRandom);
 	});
 
-	// Resets the game after win or loss
+
+// Reset Game after win or loss --------------------------------------------------->
+
+
 	function reset(){
+
+		// Reset score to zero
 		totalScore = 0;
-		// $(".random-number-box").remove();
-		// $(".gem-value-box").remove();
-		// $("#ruby").remove();
-		// $("#sapphire").remove();
-		// $("#topaz").remove();
-		// $("#emerald").remove();
+
+		// Change wins counter on html
+		$(".win-row").html("Wins: " + wins);
+		$(".loss-row").html("Loss: " + losses);
+		$(".gem-value-box").html("");
+
+		console.log("check");
 
 		// New random value for winning number
 		newWinningNumber();
 
 		// New random values for each Gem
-		var rubyRandom = Math.floor(Math.random() * 11) + 1;
-		var sapphireRandom = Math.floor(Math.random() * 11) + 1;
-		var topazRandom = Math.floor(Math.random() * 11) + 1;
-		var emeraldRandom = Math.floor(Math.random() * 11) + 1;
+		newRubyRandom();
+		newSapphireRandom();
+		newTopazRandom();
+		newEmeraldRandom();
+
+		console.log(wins);
 
 	}
-	// for(var i=0; i<totalScore.length; i++) { totalScore[i] = parseInt(totalScore[i]); }
-	
+
 	// console.log(totalScore[0] + totalScore[1]);
 	console.log(totalScore);
-	newWinningNumber();
-
-
+	console.log(wins);
 
 });
 
