@@ -4,7 +4,7 @@
 	line-height: 150px;
 	height: 150px;
 	font-size: 25px;
-	color:black;
+	color: black;
 	border-color: black;
 	border-width: 5px;
 	border-style: solid;
@@ -45,7 +45,7 @@
 }
 
 .gem-value-box {
-	margin-top:30px;
+	margin-top: 30px;
 	margin-bottom: 30px;
 	height: 150px;
 	border-color: black;
