@@ -1,7 +1,7 @@
 # jQuery Game
 
 ## Application
-Hello! This is a fun and interactive JavaScript game I built for web browsers. This web application uses jQuery to dynamically update the HTML.
+Hello! This is a fun and interactive jQuery game I built for web browsers. This web application is built with HTML, CSS, Bootstrap, Javascript, and jQuery to dynamically update the HTML.
 
 ## Access
 1. The site is deployed via GitHub Pages.
