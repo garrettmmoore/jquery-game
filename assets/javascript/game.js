@@ -102,9 +102,7 @@ function clickHelper(gem){
 		gamePlay();
 }
 	// When Ruby is clicked, add value to totalScore on each click
-	$(".gem").on("click", function ruby(){
-		var num = $(this).val();
-		num = parseInt(num);
+	$("#ruby").on("click", function ruby(){
 		clickHelper(rubyRandom);
 	});
 	// When Sapphire is clicked, add value to totalScore on each click
